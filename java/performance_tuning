@@ -1,0 +1,11 @@
+/jdk1.8.0_291/bin/java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder 
+/jdk1.8.0_291/bin/jcmd 31558 JFR.start settings=profile
+/jdk1.8.0_291/bin/jcmd 41929 JFR.dump recording=1 filename=1.jfr
+
+
+top -d 5 -bp 23578 | awk '/23578/ {print strftime("%Y-%m-%d %r"), $0}'
+
+/jdk1.8.0_291/bin/jmap -histo:live 27707
+/jdk1.8.0_291/bin/jmap -dump:live,format=b,file=xxx.bin 65021
+
+
