@@ -1,0 +1,9 @@
+declare
+maxId number;
+begin
+select max(id)+1 into maxId from atable;
+if maxBatchId is null then maxBatchId := 1; end if;
+execute immediate 'create table btable () partition by range(batch_id) interval (1) (partition p0 values less than (' || maxBatchId || '))';
+
+
+local parallel nologging
